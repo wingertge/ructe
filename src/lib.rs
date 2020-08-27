@@ -229,9 +229,13 @@ impl Ructe {
     /// [`from_env`]: #method.from_env
     pub fn new(out_dir: PathBuf) -> Result<Ructe> {
         let mut f = File::create(out_dir.join("templates.rs"))?;
-        f.write_all(
+/*        f.write_all(
             b"pub mod templates {\n\
               use std::io::{self, Write};\n\
+              use std::fmt::Display;\n\n",
+        )?;*/
+        f.write_all(
+            b"use std::io::{self, Write};\n\
               use std::fmt::Display;\n\n",
         )?;
         let outdir = out_dir.join("templates");
@@ -312,7 +316,7 @@ impl Drop for Ructe {
                 )))
                 .unwrap();
         }
-        self.f.write_all(b"\n}\n").unwrap();
+        self.f.write_all(b"\n").unwrap();
     }
 }
 
